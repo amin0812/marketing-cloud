@@ -5,8 +5,8 @@
   // Change these variables according to your own settings
   var userDetails = {
            username : marketingdeveloper",
-           token    : "c0b6a220b1a00ca1292e55cbe786e56d40b98c49",
-           repoName : "private-repo-test",
+           token    : "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",
+           repoName : "marketing-cloud",
            fileName : "test.js"
         }
   // Do not change anything below this section
