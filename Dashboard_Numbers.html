@@ -4,74 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marketing Cloud Dashboard</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .dashboard {
             display: flex;
-            justify-content: center;
+            justify-content: space-around;
             margin-top: 50px;
+            font-family: Arial, sans-serif;
         }
-        .chart-container {
-            width: 50%;
+        .count-container {
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            width: 150px;
+            box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+        }
+        .count {
+            font-size: 2.5em;
+            color: #007BFF;
+        }
+        .label {
+            font-size: 1.2em;
+            color: #333;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="row dashboard">
-            <div class="chart-container">
-                <canvas id="myChart"></canvas>
-            </div>
+    <div class="dashboard">
+        <div class="count-container">
+            <div class="count">%%=v(@countDE1)=%%</div>
+            <div class="label">Data Extension 1</div>
+        </div>
+        <div class="count-container">
+            <div class="count">%%=v(@countDE2)=%%</div>
+            <div class="label">Data Extension 2</div>
+        </div>
+        <div class="count-container">
+            <div class="count">%%=v(@countDE3)=%%</div>
+            <div class="label">Data Extension 3</div>
         </div>
     </div>
 
     <!-- Server-Side JavaScript to get Data Extension counts -->
     <script runat="server">
-        Platform.Load("Core", "1");
-        var countDE1 = DataExtension.Init("DataExtension1").Rows.Retrieve().length;
-        var countDE2 = DataExtension.Init("DataExtension2").Rows.Retrieve().length;
-        var countDE3 = DataExtension.Init("DataExtension3").Rows.Retrieve().length;
+        Platform.Load("Core", "1.1");
+
+        function getDECount(deName) {
+            var rows = DataExtension.Init(deName).Rows.Retrieve();
+            return rows.length;
+        }
+
+        var countDE1 = getDECount("DataExtension1");
+        var countDE2 = getDECount("DataExtension2");
+        var countDE3 = getDECount("DataExtension3");
 
         Variable.SetValue("@countDE1", countDE1);
         Variable.SetValue("@countDE2", countDE2);
         Variable.SetValue("@countDE3", countDE3);
-    </script>
-
-    <!-- AMPscript to embed SSJS variables into HTML -->
-    <script>
-        var countDE1 = "%%=v(@countDE1)=%%";
-        var countDE2 = "%%=v(@countDE2)=%%";
-        var countDE3 = "%%=v(@countDE3)=%%";
-
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Data Extension 1', 'Data Extension 2', 'Data Extension 3'],
-                datasets: [{
-                    label: '# of Entries',
-                    data: [countDE1, countDE2, countDE3],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
     </script>
 </body>
 </html>
