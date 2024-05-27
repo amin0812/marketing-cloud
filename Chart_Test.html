@@ -362,6 +362,15 @@
               myChartData.update();
             }
                          );
+            $("#4").click(function() {
+              var chart_data = clicks;
+              var data = myChartData.config.data;
+              data.datasets[0].data = chart_data;
+              data.datasets[0].label = "Bounces";
+              data.labels = chart_labels;
+              myChartData.update();
+            }
+                         );
           }
         };
         /* Execute Chart Function */
