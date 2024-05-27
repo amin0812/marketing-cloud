@@ -216,9 +216,13 @@
 
                   function getDECount(deName) {
                     var rows = DataExtension.Init(deName).Rows.Retrieve();
-                    Write("rows",rows);
-                    return rows.length;
-
+                    if (rows.length >= 1)  {
+                        Write("rows",Stringify(rows));
+                        return rows.length;
+                    }
+                    else {
+                        Write("No rows found")
+                    }
                   }
 
                   var countDE1 = getDECount("096C4DC0-EC04-4D91-9D37-3C0875855B61");
