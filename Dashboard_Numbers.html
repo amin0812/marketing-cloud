@@ -223,6 +223,37 @@
                                     </div>
                                 </div>
                             </div>
+                             <!-- Server-Side JavaScript to get Data Extension counts -->
+                             <script runat="server">
+                                Platform.Load("Core", "1.1");
+
+                                function getDECount(extKey) {
+                                    
+                                    var DE = DataExtension.Init(extKey);
+                                    var rows = DE.Rows.Retrieve();
+                                    var count = 0
+                                    
+                                        for (var i = 0; i < rows.length; i++) {
+                                            var dataRow = rows[i];
+                                            var count = count + 1;
+                                        }
+                                        Write ("count"+ count);
+                                        return count;
+                                   
+                                }
+
+                                var countDE1 = getDECount("096C4DC0-EC04-4D91-9D37-3C0875855B61");
+                                //Write('countDE11 :', countDE1);
+                                var countDE2 = getDECount("DD63E230-5D1F-4B56-B484-1D92701651C6");
+                                var countDE3 = getDECount("DataExtension3");
+
+                                Variable.SetValue("@countDE1", countDE1);
+                                </script>
+                                %%[Output(Concat("countAmp" , v(@countDE1)))]%%
+                                <script>
+                                Variable.SetValue("@countDE2", countDE2);
+                                Variable.SetValue("@countDE3", countDE3);
+                            </script>
                             <div class="card-body">
                                 <div class="dashboard">
                                     <div class="count-container">
@@ -239,37 +270,7 @@
                                     </div>
                                 </div>
 
-                                <!-- Server-Side JavaScript to get Data Extension counts -->
-                                <script runat="server">
-                                    Platform.Load("Core", "1.1");
-
-                                    function getDECount(extKey) {
-                                        
-                                        var DE = DataExtension.Init(extKey);
-                                        var rows = DE.Rows.Retrieve();
-                                        var count = 0
-                                        
-                                            for (var i = 0; i < rows.length; i++) {
-                                                var dataRow = rows[i];
-                                                var count = count + 1;
-                                            }
-                                            Write ("count"+ count);
-                                            return count;
-                                       
-                                    }
-
-                                    var countDE1 = getDECount("096C4DC0-EC04-4D91-9D37-3C0875855B61");
-                                    //Write('countDE11 :', countDE1);
-                                    var countDE2 = getDECount("DD63E230-5D1F-4B56-B484-1D92701651C6");
-                                    var countDE3 = getDECount("DataExtension3");
-
-                                    Variable.SetValue("@countDE1", countDE1);
-                                    </script>
-                                    %%[Output(Concat("countAmp" , v(@countDE1)))]%%
-                                    <script>
-                                    Variable.SetValue("@countDE2", countDE2);
-                                    Variable.SetValue("@countDE3", countDE3);
-                                </script>
+                               
                             </div>
                         </div>
                     </div>
