@@ -198,6 +198,15 @@
             font-size: 1.2em;
             color: #333;
         }
+
+        .powered-by {
+            text-align: right;
+            padding: 20px;
+        }
+
+        .powered-by img {
+            width: 150px;
+        }
     </style>
     <link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
@@ -212,7 +221,13 @@
                         <div class="card card-chart">
                             <div class="card-header">
                                 <div class="row">
-                                    <img src="https://image.s50.sfmc-content.com/lib/fe4211717564047d741674/m/1/adesso_basic_Color_RGB.png" alt="" style="width: 300px; padding-left: 10px;">
+                                    <div class="col-sm-6 text-left">
+                                        <img src="https://image.s50.sfmc-content.com/lib/fe4211717564047d741674/m/1/adesso_basic_Color_RGB.png" alt="" style="width: 300px; padding-left: 10px;">
+                                    </div>
+                                    <div class="col-sm-6 powered-by">
+                                        <div>Powered by</div>
+                                        <img src="https://image.s50.sfmc-content.com/lib/fe4211717564047d741674/m/1/adesso_basic_Color_RGB.png" alt="">
+                                    </div>
                                 </div>
                                 <br>
                                 <div class="row">
@@ -245,7 +260,6 @@
                                 Variable.SetValue("@countDE2", countDE2);
                                 Variable.SetValue("@countDE3", countDE3);
                             </script>
-
                             <div class="card-body">
                                 <div class="dashboard">
                                     <div class="count-container">
@@ -265,7 +279,7 @@
 
                             <script>
                                 function animateCount(elementId, finalCount) {
-                                    const duration = 1000; // Duration of the animation in milliseconds
+                                    const duration = 2000; // Duration of the animation in milliseconds
                                     const frameRate = 60; // Frames per second
                                     const totalFrames = Math.round(duration / (1000 / frameRate));
                                     let currentFrame = 0;
