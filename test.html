@@ -1,18 +1,27 @@
 
 <script runat="server">
 Platform.Load("core","1");
-var custId = "0031t000005D98UAAS"
+var extKey = "096C4DC0-EC04-4D91-9D37-3C0875855B61"
+try{
 
-var OrdersDE = DataExtension.Init("Orders");
-var rows = OrdersDE.Rows.Lookup(["CustomerId"], [custId]);
+  var DE = DataExtension.Init("Orders");
+var rows = DE.Rows.Retrieve();
 
 if(rows.length >= 1) {
       for (i = 0; i < rows.length; i++) {
-        OrderItem = rows[i]["OrderItem"];
-        Write("&#8226; OrderItem " + i + ":" + OrderItem + "<br>");
+        var Datarow = rows[i];
+        Write("row " + i + ":" + Datarow + "<br>");
     }
 }
 else {
    Write("No items to display");
+}
+
+}
+catch(e){
+
+  Write('an error occured')+Stringify(e);
+
+
 }
 </script>
