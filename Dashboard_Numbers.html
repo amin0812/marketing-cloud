@@ -216,7 +216,7 @@
 
                   function getDECount(deName) {
                     var rows = DataExtension.Init(deName).Rows.Retrieve();
-                    Write("rows",rows);
+                    Write("rows",Stringify(rows));
                     return rows.length;
 
                   }
