@@ -248,16 +248,13 @@
                                         var DE = DataExtension.Init(extKey);
                                         var rows = DE.Rows.Retrieve();
                                         var count = 0
-                                        if (rows.length >= 1) {
+                                        
                                             for (var i = 0; i < rows.length; i++) {
                                                 var dataRow = rows[i];
                                                 var count = count + 1;
-                                                Write("Row " + i + ": " + Stringify(dataRow) + "<br>");
                                             }
-                                            Write("count"+count);
-                                        } else {
-                                            Write("No items to display");
-                                        }
+                                            return count;
+                                       
                                     }
 
                                     var countDE1 = getDECount("096C4DC0-EC04-4D91-9D37-3C0875855B61");
