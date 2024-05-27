@@ -264,6 +264,9 @@
                                     var countDE3 = getDECount("DataExtension3");
 
                                     Variable.SetValue("@countDE1", countDE1);
+                                    </script>
+                                    %%[Output(Concat("countAmp" , v(@countDE1)))]%%
+                                    <script>
                                     Variable.SetValue("@countDE2", countDE2);
                                     Variable.SetValue("@countDE3", countDE3);
                                 </script>
