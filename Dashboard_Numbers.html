@@ -7,7 +7,7 @@
     <title>Marketing Cloud Dashboard</title>
     <style>
         .main-panel[data="primary"] {
-            border-top: 2px solid#beb8b4;
+            border-top: 2px solid #beb8b4;
         }
 
         .btn-primary {
@@ -212,8 +212,7 @@
                         <div class="card card-chart">
                             <div class="card-header">
                                 <div class="row">
-                                    <img src="https://image.s50.sfmc-content.com/lib/fe4211717564047d741674/m/1/adesso_basic_Color_RGB.png"
-                                        alt="" style=" width: 300px; padding-left:10px;">
+                                    <img src="https://image.s50.sfmc-content.com/lib/fe4211717564047d741674/m/1/adesso_basic_Color_RGB.png" alt="" style="width: 300px; padding-left: 10px;">
                                 </div>
                                 <br>
                                 <div class="row">
@@ -223,55 +222,77 @@
                                     </div>
                                 </div>
                             </div>
-                             <!-- Server-Side JavaScript to get Data Extension counts -->
-                             <script runat="server">
+                            <!-- Server-Side JavaScript to get Data Extension counts -->
+                            <script runat="server">
                                 Platform.Load("Core", "1.1");
 
                                 function getDECount(extKey) {
-                                    
                                     var DE = DataExtension.Init(extKey);
                                     var rows = DE.Rows.Retrieve();
-                                    var count = 0
-                                    
-                                        for (var i = 0; i < rows.length; i++) {
-                                            var dataRow = rows[i];
-                                            var count = count + 1;
-                                        }
-                                        Write ("count"+ count);
-                                        return count;
-                                   
+                                    var count = 0;
+                                    for (var i = 0; i < rows.length; i++) {
+                                        var dataRow = rows[i];
+                                        count = count + 1;
+                                    }
+                                    return count;
                                 }
 
                                 var countDE1 = getDECount("096C4DC0-EC04-4D91-9D37-3C0875855B61");
-                                //Write('countDE11 :', countDE1);
                                 var countDE2 = getDECount("DD63E230-5D1F-4B56-B484-1D92701651C6");
                                 var countDE3 = getDECount("DataExtension3");
 
                                 Variable.SetValue("@countDE1", countDE1);
-                                </script>
-                                %%[Output(Concat("countAmp" , v(@countDE1)))]%%
-                                <script>
                                 Variable.SetValue("@countDE2", countDE2);
                                 Variable.SetValue("@countDE3", countDE3);
                             </script>
+
                             <div class="card-body">
                                 <div class="dashboard">
                                     <div class="count-container">
-                                        <div class="count">%%=v(@countDE1)=%%</div>
+                                        <div class="count" id="countDE1">0</div>
                                         <div class="label">Contacts Number</div>
                                     </div>
                                     <div class="count-container">
-                                        <div class="count">%%=v(@countDE2)=%%</div>
+                                        <div class="count" id="countDE2">0</div>
                                         <div class="label">Data Extension 2</div>
                                     </div>
                                     <div class="count-container">
-                                        <div class="count">%%=v(@countDE3)=%%</div>
+                                        <div class="count" id="countDE3">0</div>
                                         <div class="label">Data Extension 3</div>
                                     </div>
                                 </div>
-
-                               
                             </div>
+
+                            <script>
+                                function animateCount(elementId, finalCount) {
+                                    const duration = 2000; // Duration of the animation in milliseconds
+                                    const frameRate = 60; // Frames per second
+                                    const totalFrames = Math.round(duration / (1000 / frameRate));
+                                    let currentFrame = 0;
+                                    const countElement = document.getElementById(elementId);
+
+                                    const counter = setInterval(() => {
+                                        currentFrame++;
+                                        const progress = currentFrame / totalFrames;
+                                        const currentCount = Math.round(finalCount * progress);
+                                        countElement.textContent = currentCount;
+
+                                        if (currentFrame === totalFrames) {
+                                            clearInterval(counter);
+                                        }
+                                    }, 1000 / frameRate);
+                                }
+
+                                document.addEventListener("DOMContentLoaded", () => {
+                                    const countDE1 = parseInt("%%=v(@countDE1)=%%", 10);
+                                    const countDE2 = parseInt("%%=v(@countDE2)=%%", 10);
+                                    const countDE3 = parseInt("%%=v(@countDE3)=%%", 10);
+
+                                    animateCount("countDE1", countDE1);
+                                    animateCount("countDE2", countDE2);
+                                    animateCount("countDE3", countDE3);
+                                });
+                            </script>
                         </div>
                     </div>
                 </div>
