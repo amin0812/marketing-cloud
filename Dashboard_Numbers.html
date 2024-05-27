@@ -1,66 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marketing Cloud Dashboard</title>
-    <style>
-        .dashboard {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 50px;
-            font-family: Arial, sans-serif;
-        }
-        .count-container {
-            text-align: center;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            width: 150px;
-            box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
-        }
-        .count {
-            font-size: 2.5em;
-            color: #007BFF;
-        }
-        .label {
-            font-size: 1.2em;
-            color: #333;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Marketing Cloud Dashboard</title>
+  <style>
+    .main-panel[data="primary"] {
+      border-top: 2px solid#beb8b4;
+    }
+    .btn-primary {
+      background: #beb8b4;
+      background-image: -webkit-linear-gradient(to bottom left, #beb8b4, #beb8b4, #beb8b4);
+      background-image: -o-linear-gradient(to bottom left, #beb8b4, #beb8b4, #beb8b4);
+      background-image: -moz-linear-gradient(to bottom left, #beb8b4, #beb8b4, #beb8b4);
+      background-image: linear-gradient(to bottom left, #beb8b4, #beb8b4, #beb8b4);
+      background-size: 210% 210%;
+      background-position: top right;
+      transition: all 0.15s ease;
+      box-shadow: none;
+      color: #000000;
+    }
+    .btn-primary.animation-on-hover:hover {
+      background-position: bottom left;
+      transition: 0.3s ease-in-out;
+    }
+    .btn-primary:hover,
+    .btn-primary:focus,
+    .btn-primary:active,
+    .btn-primary.active,
+    .btn-primary:active:focus,
+    .btn-primary:active:hover,
+    .btn-primary.active:focus,
+    .btn-primary.active:hover {
+      background-color: #beb8b4 !important;
+      background-image: linear-gradient(to bottom left, #beb8b4, #beb8b4, #beb8b4) !important;
+      box-shadow: none;
+    }
+    .btn-primary:active {
+      box-shadow: none !important;
+      transform: translateY(1px) !important;
+      transition: all .15s ease;
+    }
+    .btn-primary:not([data-action]):hover {
+      box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+      transform: translateY(-1px);
+      -webkit-transform: translateY(-1px);
+    }
+    .btn-primary.disabled,
+    .btn-primary.disabled:hover,
+    .btn-primary.disabled:focus,
+    .btn-primary.disabled.focus,
+    .btn-primary.disabled:active,
+    .btn-primary.disabled.active,
+    .btn-primary:disabled,
+    .btn-primary:disabled:hover,
+    .btn-primary:disabled:focus,
+    .btn-primary:disabled.focus,
+    .btn-primary:disabled:active,
+    .btn-primary:disabled.active,
+    .btn-primary[disabled],
+    .btn-primary[disabled]:hover,
+    .btn-primary[disabled]:focus,
+    .btn-primary[disabled].focus,
+    .btn-primary[disabled]:active,
+    .btn-primary[disabled].active,
+    fieldset[disabled] .btn-primary,
+    fieldset[disabled] .btn-primary:hover,
+    fieldset[disabled] .btn-primary:focus,
+    fieldset[disabled] .btn-primary.focus,
+    fieldset[disabled] .btn-primary:active,
+    fieldset[disabled] .btn-primary.active {
+      background-color: #beb8b4;
+      border-color: #beb8b4;
+    }
+    .btn-primary.btn-simple {
+      color: #beb8b4;
+      border-color: #0071b9;
+      background: transparent;
+    }
+    .btn-primary.btn-simple:hover,
+    .btn-primary.btn-simple:focus,
+    .btn-primary.btn-simple:active,
+    .btn-primary.btn-simple:not(:disabled):not(.disabled):active {
+      color: #beb8b4;
+      border-color: #beb8b4;
+      background-color: transparent !important;
+      background-image: none !important;
+      box-shadow: none;
+    }
+    .btn-primary.btn-simple.active {
+      border-color: #0071b9 !important;
+    }
+    .btn-primary.btn-simple.active:hover,
+    .btn-primary.btn-simple.active:focus,
+    .btn-primary.btn-simple.active:active,
+    .btn-primary.btn-simple.active:not(:disabled):not(.disabled):active {
+      color: #000000;
+      border-color: #beb8b4;
+      background-image: linear-gradient(to bottom left, #beb8b4, #beb8b4, #beb8b4) !important;
+      background-color: #beb8b4 !important;
+      box-shadow: none;
+    }
+    .btn-primary.btn-link {
+      color: #beb8b4;
+    }
+    .container-fluid {
+      max-width: 100%;
+    }
+    h2,
+    .chart-area {
+      color: #0071b9;
+    }
+    .chart-area {
+      height: 250px;
+      width: 100%;
+    }
+    h2 {
+      font-size: 1.6875rem;
+    }
+    h5 {
+      color: #857971;
+      font-size: 0.75rem;
+    }
+    * {
+      font-family: Helvetica, Arial, sans-serif;
+    }
+    body,
+    .main-panel {
+      background: #fff;
+    }
+    .card {
+      background: #323a46;
+      border: 0;
+      position: relative;
+      width: 100%;
+      margin-bottom: 30px;
+      box-shadow: 0 1px 20px 0px rgba(0, 0, 0, 0.1);
+    }
+    .card-title span {
+      padding-left: 5px;
+    }
+    .main-panel>.content {
+      width: 95%;
+      padding: 78px 0;
+      margin: 0 auto;
+    }
+    .card-header {
+      background: transparent;
+      border: 0;
+    }
+    .dashboard {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 50px;
+      font-family: Arial, sans-serif;
+    }
+    .count-container {
+      text-align: center;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      width: 150px;
+      box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+    }
+    .count {
+      font-size: 2.5em;
+      color: #007BFF;
+    }
+    .label {
+      font-size: 1.2em;
+      color: #333;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <div class="dashboard">
-        <div class="count-container">
-            <div class="count">%%=v(@countDE1)=%%</div>
-            <div class="label">Data Extension 1</div>
-        </div>
-        <div class="count-container">
-            <div class="count">%%=v(@countDE2)=%%</div>
-            <div class="label">Data Extension 2</div>
-        </div>
-        <div class="count-container">
-            <div class="count">%%=v(@countDE3)=%%</div>
-            <div class="label">Data Extension 3</div>
-        </div>
-    </div>
+<body class="">
+  <div class="wrapper">
+    <div class="main-panel">
+      <div class="content">
+        <div class="row">
+          <div class="col-12">
+            <div class="card card-chart">
+              <div class="card-header">
+                <div class="row">
+                  <img src="https://image.s50.sfmc-content.com/lib/fe4211717564047d741674/m/1/adesso_basic_Color_RGB.png" alt="" style=" width: 300px; padding-left:10px;">
+                </div>
+                <br>
+                <div class="row">
+                  <div class="col-sm-6 text-left">
+                    <h5 class="card-category">EMAIL PERFORMANCE</h5>
+                    <h2 class="card-title">Performance</h2>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="dashboard">
+                  <div class="count-container">
+                    <div class="count">%%=v(@countDE1)=%%</div>
+                    <div class="label">Data Extension 1</div>
+                  </div>
+                  <div class="count-container">
+                    <div class="count">%%=v(@countDE2)=%%</div>
+                    <div class="label">Data Extension 2</div>
+                  </div>
+                  <div class="count-container">
+                    <div class="count">%%=v(@countDE3)=%%</div>
+                    <div class="label">Data Extension 3</div>
+                  </div>
+                </div>
 
-    <!-- Server-Side JavaScript to get Data Extension counts -->
-    <script runat="server">
-        Platform.Load("Core", "1.1");
+                <!-- Server-Side JavaScript to get Data Extension counts -->
+                <script runat="server">
+                  Platform.Load("Core", "1.1");
 
-        function getDECount(deName) {
-            var rows = DataExtension.Init(deName).Rows.Retrieve();
-            return rows.length;
-        }
+                  function getDECount(deName) {
+                    var rows = DataExtension.Init(deName).Rows.Retrieve();
+                    return rows.length;
+                  }
 
-        var countDE1 = getDECount("DataExtension1");
-        var countDE2 = getDECount("DataExtension2");
-        var countDE3 = getDECount("DataExtension3");
+                  var countDE1 = getDECount("DataExtension1");
+                  var countDE2 = getDECount("DataExtension2");
+                  var countDE3 = getDECount("DataExtension3");
 
-        Variable.SetValue("@countDE1", countDE1);
-        Variable.SetValue("@countDE2", countDE2);
-        Variable.SetValue("@countDE3", countDE3);
-    </script>
-</body>
-</html>
+                  Variable.SetValue("@countDE1", countDE1);
+                  Variable.SetValue("@countDE2", countDE2);
+                  Variable.SetValue("@countDE3", countDE3);
+                </script>
+              </
