@@ -247,12 +247,14 @@
                                         
                                         var DE = DataExtension.Init(extKey);
                                         var rows = DE.Rows.Retrieve();
-
+                                        var count = 0
                                         if (rows.length >= 1) {
                                             for (var i = 0; i < rows.length; i++) {
                                                 var dataRow = rows[i];
+                                                var count = count++;
                                                 Write("Row " + i + ": " + Stringify(dataRow) + "<br>");
                                             }
+                                            Write(count);
                                         } else {
                                             Write("No items to display");
                                         }
