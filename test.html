@@ -1,0 +1,18 @@
+
+<script runat="server">
+Platform.Load("core","1");
+var custId = "0031t000005D98UAAS"
+
+var OrdersDE = DataExtension.Init("Orders");
+var rows = OrdersDE.Rows.Lookup(["CustomerId"], [custId]);
+
+if(rows.length >= 1) {
+      for (i = 0; i < rows.length; i++) {
+        OrderItem = rows[i]["OrderItem"];
+        Write("&#8226; OrderItem " + i + ":" + OrderItem + "<br>");
+    }
+}
+else {
+   Write("No items to display");
+}
+</script>
