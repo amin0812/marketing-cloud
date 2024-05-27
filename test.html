@@ -1,27 +1,20 @@
-
 <script runat="server">
-Platform.Load("core","1");
-var extKey = "096C4DC0-EC04-4D91-9D37-3C0875855B61"
-try{
+  Platform.Load("Core", "1");
 
-  var DE = DataExtension.Init("Orders");
-var rows = DE.Rows.Retrieve();
+  try {
+    var extKey = "096C4DC0-EC04-4D91-9D37-3C0875855B61";
+    var DE = DataExtension.Init(extKey);
+    var rows = DE.Rows.Retrieve();
 
-if(rows.length >= 1) {
-      for (i = 0; i < rows.length; i++) {
-        var Datarow = rows[i];
-        Write("row " + i + ":" + Datarow + "<br>");
+    if (rows.length >= 1) {
+      for (var i = 0; i < rows.length; i++) {
+        var dataRow = rows[i];
+        Write("Row " + i + ": " + Stringify(dataRow) + "<br>");
+      }
+    } else {
+      Write("No items to display");
     }
-}
-else {
-   Write("No items to display");
-}
-
-}
-catch(e){
-
-  Write('an error occured')+Stringify(e);
-
-
-}
+  } catch (e) {
+    Write("An error occurred: " + Stringify(e));
+  }
 </script>
