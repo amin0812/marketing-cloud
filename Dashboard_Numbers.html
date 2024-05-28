@@ -274,9 +274,16 @@
                                 var countDE2 = getDECount("DD63E230-5D1F-4B56-B484-1D92701651C6");
                                 var countDE3 = getDECount("DataExtension3");
 
+                                var count1 = getDECount("DataExtension4");
+                                var count2 = getDECount("DataExtension5");
+                                var count3 = getDECount("DataExtension6");
+
                                 Variable.SetValue("@countDE1", countDE1);
                                 Variable.SetValue("@countDE2", countDE2);
                                 Variable.SetValue("@countDE3", countDE3);
+                                Variable.SetValue("@count1", count1);
+                                Variable.SetValue("@count2", count2);
+                                Variable.SetValue("@count3", count3);
                             </script>
                             <div class="card-body">
                                 <div class="dashboard">
@@ -293,8 +300,22 @@
                                         <div class="label">Active campaigns</div>
                                     </div>
                                 </div>
+
+                                <div class="dashboard">
+                                    <div class="count-container">
+                                        <div class="count" id="count1">0</div>
+                                        <div class="label">Count 1</div>
+                                    </div>
+                                    <div class="count-container">
+                                        <div class="count" id="count2">0</div>
+                                        <div class="label">Count 2</div>
+                                    </div>
+                                    <div class="count-container">
+                                        <div class="count" id="count3">0</div>
+                                        <div class="label">Count 3</div>
+                                    </div>
+                                </div>
                             </div>
-                            
 
                             <script>
                                 function animateCount(elementId, finalCount) {
@@ -321,9 +342,17 @@
                                     const countDE2 = parseInt("%%=v(@countDE2)=%%", 10);
                                     const countDE3 = parseInt("%%=v(@countDE3)=%%", 10);
 
+                                    const count1 = parseInt("%%=v(@count1)=%%", 10);
+                                    const count2 = parseInt("%%=v(@count2)=%%", 10);
+                                    const count3 = parseInt("%%=v(@count3)=%%", 10);
+
                                     animateCount("countDE1", countDE1);
                                     animateCount("countDE2", countDE2);
                                     animateCount("countDE3", countDE3);
+
+                                    animateCount("count1", count1);
+                                    animateCount("count2", count2);
+                                    animateCount("count3", count3);
                                 });
                             </script>
                         </div>
@@ -335,3 +364,5 @@
 </body>
 
 </html>
+
+           
