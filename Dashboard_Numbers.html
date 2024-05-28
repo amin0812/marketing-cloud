@@ -207,17 +207,16 @@
         }
 
         .powered-by {
-            text-align: right; /* Align the text to the left */
+            text-align: right;
             color: #857971;
             font-size: 1.5rem;
         }
 
-        /* Additional CSS for icon alignment */
         .powered-by img {
-            display: inline-block; /* Ensures the image is aligned correctly */
-            width: 250px; /* Adjust width as needed */
-            vertical-align: right; /* Aligns the image vertically */
-            margin-right: -35px; /* Added margin for spacing */
+            display: inline-block;
+            width: 250px;
+            vertical-align: right;
+            margin-right: -35px;
         }
 
         .separation-line {
@@ -273,7 +272,6 @@
                                 var countDE1 = getDECount("096C4DC0-EC04-4D91-9D37-3C0875855B61");
                                 var countDE2 = getDECount("DD63E230-5D1F-4B56-B484-1D92701651C6");
                                 var countDE3 = getDECount("DataExtension3");
-
                                 var count1 = getDECount("DataExtension4");
                                 var count2 = getDECount("DataExtension5");
                                 var count3 = getDECount("DataExtension6");
@@ -298,9 +296,13 @@
                                     <div class="count-container">
                                         <div class="count" id="countDE3">0</div>
                                         <div class="label">Active campaigns</div>
+                                        <select id="dropdown" class="form-control">
+                                            <option value="adesso_se">adesso SE</option>
+                                            <option value="first_business_unit">First Business Unit</option>
+                                            <option value="second_business_unit">Second Business Unit</option>
+                                        </select>
                                     </div>
                                 </div>
-
                                 <div class="dashboard">
                                     <div class="count-container">
                                         <div class="count" id="count1">0</div>
@@ -341,7 +343,6 @@
                                     const countDE1 = parseInt("%%=v(@countDE1)=%%", 10);
                                     const countDE2 = parseInt("%%=v(@countDE2)=%%", 10);
                                     const countDE3 = parseInt("%%=v(@countDE3)=%%", 10);
-
                                     const count1 = parseInt("%%=v(@count1)=%%", 10);
                                     const count2 = parseInt("%%=v(@count2)=%%", 10);
                                     const count3 = parseInt("%%=v(@count3)=%%", 10);
@@ -349,7 +350,6 @@
                                     animateCount("countDE1", countDE1);
                                     animateCount("countDE2", countDE2);
                                     animateCount("countDE3", countDE3);
-
                                     animateCount("count1", count1);
                                     animateCount("count2", count2);
                                     animateCount("count3", count3);
@@ -364,5 +364,3 @@
 </body>
 
 </html>
-
-           
