@@ -270,18 +270,18 @@
                                 }
 
                                 var ActiveUser = getDECount("096C4DC0-EC04-4D91-9D37-3C0875855B61");
-                                var countDE2 = getDECount("DD63E230-5D1F-4B56-B484-1D92701651C6");
-                                var countDE3 = getDECount("DataExtension3");
-                                var count1 = getDECount("DataExtension4");
-                                var count2 = getDECount("DataExtension5");
-                                var count3 = getDECount("DataExtension6");
+                                var RunnedAutomations = getDECount("DD63E230-5D1F-4B56-B484-1D92701651C6");
+                                var ActiveCampaigns = getDECount("1E2FD303-2553-401E-9A20-56EE0167D25B");
+                                var SentEmails = getDECount("DataExtension4");
+                                var LicenceExpiration = getDECount("DataExtension5");
+                                var AllContactsNumber = getDECount("DataExtension6");
 
                                 Variable.SetValue("@ActiveUser", ActiveUser);
-                                Variable.SetValue("@countDE2", countDE2);
-                                Variable.SetValue("@countDE3", countDE3);
-                                Variable.SetValue("@count1", count1);
-                                Variable.SetValue("@count2", count2);
-                                Variable.SetValue("@count3", count3);
+                                Variable.SetValue("@RunnedAutomations", RunnedAutomations);
+                                Variable.SetValue("@ActiveCampaigns", ActiveCampaigns);
+                                Variable.SetValue("@SentEmails", SentEmails);
+                                Variable.SetValue("@LicenceExpiration", LicenceExpiration);
+                                Variable.SetValue("@AllContactsNumber", AllContactsNumber);
                             </script>
                             <div class="card-body">
                                 <div class="dashboard">
@@ -290,11 +290,11 @@
                                         <div class="label">Active users</div>
                                     </div>
                                     <div class="count-container">
-                                        <div class="count" id="countDE2">0</div>
+                                        <div class="count" id="RunnedAutomations">0</div>
                                         <div class="label">Runned automations</div>
                                     </div>
                                     <div class="count-container">
-                                        <div class="count" id="countDE3">0</div>
+                                        <div class="count" id="ActiveCampaigns">0</div>
                                         <div class="label">Active campaigns</div>
                                         <select id="dropdown" class="form-control">
                                             <option value="adesso_se">adesso SE</option>
@@ -305,15 +305,15 @@
                                 </div>
                                 <div class="dashboard">
                                     <div class="count-container">
-                                        <div class="count" id="count1">0</div>
+                                        <div class="count" id="SentEmails">0</div>
                                         <div class="label">Sent Emails</div>
                                     </div>
                                     <div class="count-container">
-                                        <div class="count" id="count2">0</div>
+                                        <div class="count" id="LicenceExpiration">0</div>
                                         <div class="label">Licence Expiration</div>
                                     </div>
                                     <div class="count-container">
-                                        <div class="count" id="count3">0</div>
+                                        <div class="count" id="AllContactsNumber">0</div>
                                         <div class="label">All contacts number</div>
                                     </div>
                                 </div>
@@ -341,18 +341,18 @@
 
                                 document.addEventListener("DOMContentLoaded", () => {
                                     const ActiveUser = parseInt("%%=v(@ActiveUser)=%%", 10);
-                                    const countDE2 = parseInt("%%=v(@countDE2)=%%", 10);
-                                    const countDE3 = parseInt("%%=v(@countDE3)=%%", 10);
-                                    const count1 = parseInt("%%=v(@count1)=%%", 10);
-                                    const count2 = parseInt("%%=v(@count2)=%%", 10);
-                                    const count3 = parseInt("%%=v(@count3)=%%", 10);
+                                    const RunnedAutomations = parseInt("%%=v(@RunnedAutomations)=%%", 10);
+                                    const ActiveCampaigns = parseInt("%%=v(@ActiveCampaigns)=%%", 10);
+                                    const SentEmails = parseInt("%%=v(@SentEmails)=%%", 10);
+                                    const LicenceExpiration = parseInt("%%=v(@LicenceExpiration)=%%", 10);
+                                    const AllContactsNumber = parseInt("%%=v(@AllContactsNumber)=%%", 10);
 
                                     animateCount("ActiveUser", ActiveUser);
-                                    animateCount("countDE2", countDE2);
-                                    animateCount("countDE3", countDE3);
-                                    animateCount("count1", count1);
-                                    animateCount("count2", count2);
-                                    animateCount("count3", count3);
+                                    animateCount("RunnedAutomations", RunnedAutomations);
+                                    animateCount("ActiveCampaigns", ActiveCampaigns);
+                                    animateCount("SentEmails", SentEmails);
+                                    animateCount("LicenceExpiration", LicenceExpiration);
+                                    animateCount("AllContactsNumber", AllContactsNumber);
                                 });
                             </script>
                         </div>
