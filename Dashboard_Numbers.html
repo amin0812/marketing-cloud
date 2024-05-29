@@ -341,17 +341,16 @@
 
                                 function animateDate(elementId, finalDate) {
                                     const countElement = document.getElementById(elementId);
-                                    const targetDate = new Date(finalDate).getTime();
+                                    const targetDate = new Date(finalDate);
+                                    const now = new Date();
 
-                                    const timer = setInterval(() => {
-                                        const now = new Date().getTime();
-                                        const distance = targetDate - now;
+                                    const daysDuration = Math.abs(targetDate.getDate() - now.getDate());
+                                    const monthsDuration = Math.abs(targetDate.getMonth() - now.getMonth());
+                                    const yearsDuration = Math.abs(targetDate.getFullYear() - now.getFullYear());
 
-                                        if (distance <= 0) {
-                                            clearInterval(timer);
-                                            countElement.textContent = finalDate;
-                                        }
-                                    }, 1000);
+                                    animateCount(elementId + "-days", now.getDate(), targetDate.getDate(), daysDuration * 1000);
+                                    animateCount(elementId + "-months", now.getMonth() + 1, targetDate.getMonth() + 1, monthsDuration * 1000);
+                                    animateCount(elementId + "-years", now.getFullYear(), targetDate.getFullYear(), yearsDuration * 1000);
                                 }
 
                                 document.addEventListener("DOMContentLoaded", () => {
