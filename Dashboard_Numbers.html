@@ -261,7 +261,7 @@
                                 function getDECount(extKey) {
                                     var DE = DataExtension.Init(extKey);
                                     var rows = DE.Rows.Retrieve();
-                                    var count = 0;
+                                    
                                     /*for (var i = 0; i < rows.length; i++) {
                                         var dataRow = rows[i];
                                         count = count + 1;
@@ -272,8 +272,8 @@
                                 var ActiveUser = getDECount("096C4DC0-EC04-4D91-9D37-3C0875855B61");
                                 var RunnedAutomations = getDECount("DD63E230-5D1F-4B56-B484-1D92701651C6");
                                 var ActiveCampaigns = getDECount("6B01E515-104A-41C9-8683-5D4C0BDF17CB");
-                                var SentEmails = getDECount("DataExtension4");
-                                var LicenceExpiration = getDECount("DataExtension5");
+                                var SentEmails = getDECount("9FC4497F-1162-4F14-B0B5-FCF80F73C7CC");
+                                var LicenceExpiration = getDECount("5B81E0C4-D3E0-475D-94DA-DC986D6F56F3");
                                 var AllContactsNumber = getDECount("DataExtension6");
 
                                 Variable.SetValue("@ActiveUser", ActiveUser);
