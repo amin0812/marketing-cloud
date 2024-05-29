@@ -344,14 +344,14 @@
                                     const RunnedAutomations = parseInt("%%=v(@RunnedAutomations)=%%", 10);
                                     const ActiveCampaigns = parseInt("%%=v(@ActiveCampaigns)=%%", 10);
                                     const SentEmails = parseInt("%%=v(@SentEmails)=%%", 10);
-                                    const LicenceExpiration = parseInt("30/06/2025", 10);
+                                    document.getElementById("LicenceExpiration").textContent = LicenceExpiration;
                                     const AllContactsNumber = parseInt("%%=v(@AllContactsNumber)=%%", 10);
 
                                     animateCount("ActiveUser", ActiveUser);
                                     animateCount("RunnedAutomations", RunnedAutomations);
                                     animateCount("ActiveCampaigns", ActiveCampaigns);
                                     animateCount("SentEmails", SentEmails);
-                                    animateCount("LicenceExpiration", LicenceExpiration);
+                                    document.getElementById("LicenceExpiration").textContent = LicenceExpiration;
                                     animateCount("AllContactsNumber", AllContactsNumber);
                                 });
                             </script>
