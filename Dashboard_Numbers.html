@@ -228,6 +228,7 @@
     <link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
 </head>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <body class="">
     <div class="wrapper">
@@ -368,8 +369,33 @@
                                     animateCount("SentEmails", SentEmails);
                                     animateDate("LicenceExpiration", "06/30/2025");
                                     animateCount("AllContactsNumber", AllContactsNumber);
+                                // Chart.js Pie Chart
+                                const pieData = {
+                                        labels: ['Red', 'Blue', 'Yellow'],
+                                        datasets: [{
+                                            data: [300, 50, 100],
+                                            backgroundColor: [
+                                                'rgb(255, 99, 132)',
+                                                'rgb(54, 162, 235)',
+                                                'rgb(255, 205, 86)'
+                                            ]
+                                        }]
+                                    };
+
+                                    const pieOptions = {
+                                        responsive: true,
+                                        maintainAspectRatio: false
+                                    };
+
+                                    const pieChartCanvas = document.getElementById('pieChart').getContext('2d');
+                                    new Chart(pieChartCanvas, {
+                                        type: 'pie',
+                                        data: pieData,
+                                        options: pieOptions
+                                    });
                                 });
                             </script>
+                            <canvas id="pieChart" width="400" height="400"></canvas>
                         </div>
                     </div>
                 </div>
