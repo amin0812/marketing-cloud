@@ -228,6 +228,7 @@
     <link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
 </head>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <body class="">
     <div class="wrapper">
@@ -239,11 +240,13 @@
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-sm-6 text-left">
-                                        <img src="https://image.s50.sfmc-content.com/lib/fe4211717564047d741674/m/1/adesso_basic_Color_RGB.png" alt="" style="width: 300px; padding-left: 10px;">
+                                        <img src="https://image.s50.sfmc-content.com/lib/fe4211717564047d741674/m/1/adesso_basic_Color_RGB.png"
+                                            alt="" style="width: 300px; padding-left: 10px;">
                                     </div>
                                     <div class="col-sm-6 powered-by">
                                         <div>Powered by</div>
-                                        <img src="https://image.s50.sfmc-content.com/lib/fe4211717564047d741674/m/1/adesso_basic_Color_RGB.png" alt="">
+                                        <img src="https://image.s50.sfmc-content.com/lib/fe4211717564047d741674/m/1/adesso_basic_Color_RGB.png"
+                                            alt="">
                                     </div>
                                 </div>
                                 <br>
@@ -261,7 +264,7 @@
                                 function getDECount(extKey) {
                                     var DE = DataExtension.Init(extKey);
                                     var rows = DE.Rows.Retrieve();
-                                    
+
                                     /*for (var i = 0; i < rows.length; i++) {
                                         var dataRow = rows[i];
                                         count = count + 1;
@@ -361,6 +364,33 @@
                                     const SentEmails = parseInt("%%=v(@SentEmails)=%%", 10);
                                     const LicenceExpiration = "%%=v(@LicenceExpiration)=%%";
                                     const AllContactsNumber = parseInt("%%=v(@AllContactsNumber)=%%", 10);
+
+                                    // Data for pie chart
+                                    const pieData = {
+                                        labels: ['Red', 'Blue', 'Yellow'],
+                                        datasets: [{
+                                            data: [300, 50, 100],
+                                            backgroundColor: [
+                                                'rgb(255, 99, 132)',
+                                                'rgb(54, 162, 235)',
+                                                'rgb(255, 205, 86)'
+                                            ]
+                                        }]
+                                    };
+
+                                    // Options for pie chart
+                                    const pieOptions = {
+                                        responsive: true,
+                                        maintainAspectRatio: false
+                                    };
+
+                                    // Initialize pie chart
+                                    const pieChartCanvas = document.getElementById('pieChart').getContext('2d');
+                                    new Chart(pieChartCanvas, {
+                                        type: 'pie',
+                                        data: pieData,
+                                        options: pieOptions
+                                    });
 
                                     animateCount("ActiveUser", ActiveUser);
                                     animateCount("RunnedAutomations", RunnedAutomations);
