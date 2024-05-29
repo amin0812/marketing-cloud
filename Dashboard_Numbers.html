@@ -350,11 +350,10 @@
                                         const distance = countDownDate - now;
 
                                         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                                        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                                        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                                        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                                        const months = Math.floor(days / 30);
+                                        const years = Math.floor(months / 12);
 
-                                        countElement.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+                                        countElement.textContent = `${years} years ${months % 12} months ${days % 30} days left`;
 
                                         if (distance < 0) {
                                             clearInterval(timer);
@@ -362,7 +361,6 @@
                                         }
                                     }, 1000 / frameRate);
                                 }
-
 
                                 document.addEventListener("DOMContentLoaded", () => {
                                     const ActiveUser = parseInt("%%=v(@ActiveUser)=%%", 10);
@@ -376,7 +374,7 @@
                                     animateCount("RunnedAutomations", RunnedAutomations);
                                     animateCount("ActiveCampaigns", ActiveCampaigns);
                                     animateCount("SentEmails", SentEmails);
-                                    animateDate("LicenceExpiration", LicenceExpiration);
+                                    animateDate("LicenceExpiration", "06/30/2025");
                                     animateCount("AllContactsNumber", AllContactsNumber);
                                 });
                             </script>
