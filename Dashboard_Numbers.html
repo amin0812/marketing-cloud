@@ -339,6 +339,18 @@
                                     }, 1000 / frameRate);
                                 }
 
+                                function animateDays(elementId, startDay, finalDay, duration) {
+                                    animateCount(elementId, startDay, finalDay, duration);
+                                }
+
+                                function animateMonths(elementId, startMonth, finalMonth, duration) {
+                                    animateCount(elementId, startMonth, finalMonth, duration);
+                                }
+
+                                function animateYears(elementId, startYear, finalYear, duration) {
+                                    animateCount(elementId, startYear, finalYear, duration);
+                                }
+
                                 function animateDate(elementId, finalDate) {
                                     const countElement = document.getElementById(elementId);
                                     const targetDate = new Date(finalDate);
@@ -348,9 +360,9 @@
                                     const monthsDuration = Math.abs(targetDate.getMonth() - now.getMonth());
                                     const yearsDuration = Math.abs(targetDate.getFullYear() - now.getFullYear());
 
-                                    animateCount(elementId + "-days", now.getDate(), targetDate.getDate(), daysDuration * 1000);
-                                    animateCount(elementId + "-months", now.getMonth() + 1, targetDate.getMonth() + 1, monthsDuration * 1000);
-                                    animateCount(elementId + "-years", now.getFullYear(), targetDate.getFullYear(), yearsDuration * 1000);
+                                    animateDays(elementId + "-days", now.getDate(), targetDate.getDate(), daysDuration * 1000);
+                                    animateMonths(elementId + "-months", now.getMonth() + 1, targetDate.getMonth() + 1, monthsDuration * 1000);
+                                    animateYears(elementId + "-years", now.getFullYear(), targetDate.getFullYear(), yearsDuration * 1000);
                                 }
 
                                 document.addEventListener("DOMContentLoaded", () => {
