@@ -339,6 +339,31 @@
                                     }, 1000 / frameRate);
                                 }
 
+                                function animateDate(elementId, finalDate) {
+                                    const duration = 2000; // Duration of the animation in milliseconds
+                                    const frameRate = 60; // Frames per second
+                                    const countDownDate = new Date(finalDate).getTime();
+                                    const countElement = document.getElementById(elementId);
+
+                                    const timer = setInterval(() => {
+                                        const now = new Date().getTime();
+                                        const distance = countDownDate - now;
+
+                                        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                                        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                                        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                                        countElement.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+                                        if (distance < 0) {
+                                            clearInterval(timer);
+                                            countElement.textContent = "EXPIRED";
+                                        }
+                                    }, 1000 / frameRate);
+                                }
+
+
                                 document.addEventListener("DOMContentLoaded", () => {
                                     const ActiveUser = parseInt("%%=v(@ActiveUser)=%%", 10);
                                     const RunnedAutomations = parseInt("%%=v(@RunnedAutomations)=%%", 10);
@@ -351,7 +376,7 @@
                                     animateCount("RunnedAutomations", RunnedAutomations);
                                     animateCount("ActiveCampaigns", ActiveCampaigns);
                                     animateCount("SentEmails", SentEmails);
-                                    document.getElementById("LicenceExpiration").textContent = LicenceExpiration;
+                                    animateDate("LicenceExpiration", LicenceExpiration);
                                     animateCount("AllContactsNumber", AllContactsNumber);
                                 });
                             </script>
