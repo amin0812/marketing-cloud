@@ -240,11 +240,13 @@
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-sm-6 text-left">
-                                        <img src="https://image.s50.sfmc-content.com/lib/fe4211717564047d741674/m/1/adesso_basic_Color_RGB.png" alt="" style="width: 300px; padding-left: 10px;">
+                                        <img src="https://image.s50.sfmc-content.com/lib/fe4211717564047d741674/m/1/adesso_basic_Color_RGB.png"
+                                            alt="" style="width: 300px; padding-left: 10px;">
                                     </div>
                                     <div class="col-sm-6 powered-by">
                                         <div>Powered by</div>
-                                        <img src="https://image.s50.sfmc-content.com/lib/fe4211717564047d741674/m/1/adesso_basic_Color_RGB.png" alt="">
+                                        <img src="https://image.s50.sfmc-content.com/lib/fe4211717564047d741674/m/1/adesso_basic_Color_RGB.png"
+                                            alt="">
                                     </div>
                                 </div>
                                 <br>
@@ -262,7 +264,7 @@
                                 function getDECount(extKey) {
                                     var DE = DataExtension.Init(extKey);
                                     var rows = DE.Rows.Retrieve();
-                                    
+
                                     /*for (var i = 0; i < rows.length; i++) {
                                         var dataRow = rows[i];
                                         count = count + 1;
@@ -355,6 +357,33 @@
                                     }, 1000);
                                 }
 
+                                // Data for pie chart
+                                const pieData = {
+                                    labels: ['Red', 'Blue', 'Yellow'],
+                                    datasets: [{
+                                        data: [300, 50, 100],
+                                        backgroundColor: [
+                                            'rgb(255, 99, 132)',
+                                            'rgb(54, 162, 235)',
+                                            'rgb(255, 205, 86)'
+                                        ]
+                                    }]
+                                };
+
+                                // Options for pie chart
+                                const pieOptions = {
+                                    responsive: true,
+                                    maintainAspectRatio: false
+                                };
+
+                                // Initialize pie chart
+                                const pieChartCanvas = document.getElementById('pieChart').getContext('2d');
+                                new Chart(pieChartCanvas, {
+                                    type: 'pie',
+                                    data: pieData,
+                                    options: pieOptions
+                                });
+
                                 document.addEventListener("DOMContentLoaded", () => {
                                     const ActiveUser = parseInt("%%=v(@ActiveUser)=%%", 10);
                                     const RunnedAutomations = parseInt("%%=v(@RunnedAutomations)=%%", 10);
@@ -369,33 +398,8 @@
                                     animateCount("SentEmails", SentEmails);
                                     animateDate("LicenceExpiration", "06/30/2025");
                                     animateCount("AllContactsNumber", AllContactsNumber);
-                                // Chart.js Pie Chart
-                                const pieData = {
-                                        labels: ['Red', 'Blue', 'Yellow'],
-                                        datasets: [{
-                                            data: [300, 50, 100],
-                                            backgroundColor: [
-                                                'rgb(255, 99, 132)',
-                                                'rgb(54, 162, 235)',
-                                                'rgb(255, 205, 86)'
-                                            ]
-                                        }]
-                                    };
-
-                                    const pieOptions = {
-                                        responsive: true,
-                                        maintainAspectRatio: false
-                                    };
-
-                                    const pieChartCanvas = document.getElementById('pieChart').getContext('2d');
-                                    new Chart(pieChartCanvas, {
-                                        type: 'pie',
-                                        data: pieData,
-                                        options: pieOptions
-                                    });
                                 });
                             </script>
-                            <canvas id="pieChart" width="400" height="400"></canvas>
                         </div>
                     </div>
                 </div>
