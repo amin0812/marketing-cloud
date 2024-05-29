@@ -342,24 +342,19 @@
                                 function animateDate(elementId, finalDate) {
                                     const duration = 2000; // Duration of the animation in milliseconds
                                     const frameRate = 60; // Frames per second
-                                    const countDownDate = new Date(finalDate).getTime();
                                     const countElement = document.getElementById(elementId);
+                                    let currentDate = new Date();
+                                    const finalDateObj = new Date(finalDate);
 
-                                    const timer = setInterval(() => {
-                                        const now = new Date().getTime();
-                                        const distance = countDownDate - now;
+                                    const counter = setInterval(() => {
+                                        currentDate.setDate(currentDate.getDate() + 1);
+                                        const formattedDate = currentDate.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' });
+                                        countElement.textContent = formattedDate;
 
-                                        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                                        const months = Math.floor(days / 30);
-                                        const years = Math.floor(months / 12);
-
-                                        countElement.textContent = `${years} years ${months % 12} months ${days % 30} days left`;
-
-                                        if (distance < 0) {
-                                            clearInterval(timer);
-                                            countElement.textContent = "EXPIRED";
+                                        if (currentDate.getTime() === finalDateObj.getTime()) {
+                                            clearInterval(counter);
                                         }
-                                    }, 1000 / frameRate);
+                                    }, duration / Math.abs(currentDate - finalDateObj));
                                 }
 
                                 document.addEventListener("DOMContentLoaded", () => {
