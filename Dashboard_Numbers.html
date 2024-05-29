@@ -340,22 +340,18 @@
                                 }
 
                                 function animateDate(elementId, finalDate) {
-                                    const duration = 2000; // Duration of the animation in milliseconds
-                                    const frameRate = 60; // Frames per second
                                     const countElement = document.getElementById(elementId);
-                                    let currentDate = new Date();
-                                    const finalDateObj = new Date(finalDate);
+                                    const targetDate = new Date(finalDate).getTime();
 
-                                    const counter = setInterval(() => {
-                                        if (currentDate.getTime() === finalDateObj.getTime()) {
-                                            clearInterval(counter);
-                                            return;
+                                    const timer = setInterval(() => {
+                                        const now = new Date().getTime();
+                                        const distance = targetDate - now;
+
+                                        if (distance <= 0) {
+                                            clearInterval(timer);
+                                            countElement.textContent = finalDate;
                                         }
-
-                                        currentDate.setDate(currentDate.getDate() + 1);
-                                        const formattedDate = currentDate.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' });
-                                        countElement.textContent = formattedDate;
-                                    }, duration / Math.abs(currentDate - finalDateObj));
+                                    }, 1000);
                                 }
 
                                 document.addEventListener("DOMContentLoaded", () => {
@@ -370,7 +366,7 @@
                                     animateCount("RunnedAutomations", RunnedAutomations);
                                     animateCount("ActiveCampaigns", ActiveCampaigns);
                                     animateCount("SentEmails", SentEmails);
-                                    animateDate("LicenceExpiration", "30/06/2025");
+                                    animateDate("LicenceExpiration", "06/30/2025");
                                     animateCount("AllContactsNumber", AllContactsNumber);
                                 });
                             </script>
