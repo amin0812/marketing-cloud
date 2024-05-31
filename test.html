@@ -4,6 +4,11 @@
   try{
     var prox = new Script.Util.WSProxy();
     var queryAllAccounts = true;
+    filter ={
+      Property : "Name",
+      SimpleOperator: "equals",
+      Value : AllContacts
+    };
     var cols = ["Name","CustomerKey","CategoryID","IsSendable"];
 
     var desc = prox.retrieve("DataExtension", cols, filter, queryAllAccounts);
