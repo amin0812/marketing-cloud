@@ -3,7 +3,7 @@
   var prox = new Script.Util.WSProxy();
   try{
     var prox = new Script.Util.WSProxy();
-    var props = true ;
+    var queryAllAccounts = true;
     filter ={
       Property : "Name",
       SimpleOperator: "equals",
@@ -11,7 +11,7 @@
     };
     var cols = ["Name","CustomerKey","CategoryID","IsSendable"];
 
-    var desc = prox.retrieve("DataExtension", cols, filter, props);
+    var desc = prox.retrieve("DataExtension", cols, filter, queryAllAccounts);
   
       // Log the results to the console for debugging
       Write("<pre>");
