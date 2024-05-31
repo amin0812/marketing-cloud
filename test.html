@@ -7,11 +7,11 @@
     filter ={
       Property : "Name",
       SimpleOperator: "equals",
-      Value : "Consent_Data"
+      Value : "AllContacts"
     };
     var cols = ["Name","CustomerKey","CategoryID","IsSendable"];
 
-    var desc = prox.retrieve("Automation", cols, filter, props);
+    var desc = prox.retrieve("DataExtension", cols, filter, props);
   
       // Log the results to the console for debugging
       Write("<pre>");
