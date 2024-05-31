@@ -2,17 +2,15 @@
   // Initialize the WSProxy object
   var prox = new Script.Util.WSProxy();
   try{
-  // Define the columns you want to retrieve
-  var cols = ["Name", "CustomerKey", "CategoryID", "IsSendable"];
+    var prox = new Script.Util.WSProxy();
+    var queryAllAccounts = true;
+    var cols = ["Name","CustomerKey","CategoryID","IsSendable"];
 
-  // Retrieve Data Extension metadata
-  var data = prox.retrieve("DataExtension", cols);
-
-  // Check if data was retrieved successfully
+    var desc = prox.retrieve("DataExtension", cols, filter, queryAllAccounts);
   
       // Log the results to the console for debugging
       Write("<pre>");
-      Write(Stringify(data.Results));
+      Write(Stringify(desc.Results));
       Write("</pre>");}
       catch(e)
       {
