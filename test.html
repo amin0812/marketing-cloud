@@ -1,25 +1,22 @@
 <script runat="server">
   // Initialize the WSProxy object
   var prox = new Script.Util.WSProxy();
-
-  // Define the Data Extension external key
-  var customerKey = "59B991DF-8254-46ED-961E-11728D9635D2";
-
+  try{
   // Define the columns you want to retrieve
-  var columns = ["MemberID", "AutomationName", "AutomationDescription"];
+  var cols = ["Name", "CustomerKey", "CategoryID", "IsSendable"];
 
-  // Retrieve data from the Data Extension
-  var result = prox.retrieve("DataExtensionObject[" + customerKey + "]", columns);
+  // Retrieve Data Extension metadata
+  var data = prox.retrieve("DataExtension", cols);
 
   // Check if data was retrieved successfully
-  if (result != null && result.HasErrors === false) {
+  
       // Log the results to the console for debugging
-      Write(Stringify(result.Results));
-  } else {
-      // Log an error message if the retrieval failed
-      Write("Error retrieving data from Data Extension.");
-      if (result != null && result.Errors) {
-          Write(Stringify(result.Errors));
+      Write("<pre>");
+      Write(Stringify(data.Results));
+      Write("</pre>");}
+      catch(e)
+      {
+        Write(Stringify(e));
       }
-  }
+  
 </script>
