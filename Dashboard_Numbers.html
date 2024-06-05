@@ -239,11 +239,13 @@
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-sm-6 text-left">
-                                        <img src="https://image.s50.sfmc-content.com/lib/fe4211717564047d741674/m/1/adesso_basic_Color_RGB.png" alt="" style="width: 300px; padding-left: 10px;">
+                                        <img src="https://image.s50.sfmc-content.com/lib/fe4211717564047d741674/m/1/adesso_basic_Color_RGB.png"
+                                            alt="" style="width: 300px; padding-left: 10px;">
                                     </div>
                                     <div class="col-sm-6 powered-by">
                                         <div>Powered by</div>
-                                        <img src="https://image.s50.sfmc-content.com/lib/fe4211717564047d741674/m/1/adesso_basic_Color_RGB.png" alt="">
+                                        <img src="https://image.s50.sfmc-content.com/lib/fe4211717564047d741674/m/1/adesso_basic_Color_RGB.png"
+                                            alt="">
                                     </div>
                                 </div>
                                 <br>
@@ -261,7 +263,7 @@
                                 function getDECount(extKey) {
                                     var DE = DataExtension.Init(extKey);
                                     var rows = DE.Rows.Retrieve();
-                                    
+
                                     /*for (var i = 0; i < rows.length; i++) {
                                         var dataRow = rows[i];
                                         count = count + 1;
@@ -369,6 +371,55 @@
                                     animateDate("LicenceExpiration", "06/30/2025");
                                     animateCount("AllContactsNumber", AllContactsNumber);
                                 });
+
+                                // Event listener for the dropdown
+                                document.getElementById('dropdown').addEventListener('change', function () {
+                                    var selectedValue = this.value;
+                                    // Make an AJAX call to the server to set the client ID
+                                    var xhr = new XMLHttpRequest();
+                                    xhr.open("POST", "setClientIdHandler.ashx", true);
+                                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                                    xhr.onreadystatechange = function () {
+                                        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                                            // Optionally, refresh the data after setting the client ID
+                                            location.reload();
+                                        }
+                                    };
+                                    xhr.send("selectedValue=" + selectedValue);
+                                });
+
+                                try {
+                                    var selectedValue = Request.GetQueryStringParameter("selectedValue");
+                                    var clientId;
+                                    var allContactsCount = 0;
+
+                                    if (selectedValue !== "adesso_se") {
+                                        switch (selectedValue) {
+                                            case "first_business_unit":
+                                                clientId = 510000333; // Replace with actual client ID for adesso SE
+                                                break;
+                                            case "second_business_unit":
+                                                clientId = 510006945; // Replace with actual client ID for Second Business Unit
+                                                break;
+                                            // Add more cases if necessary
+                                        }
+
+                                        if (clientId) {
+                                            var prox = new Script.Util.WSProxy();
+                                            prox.setClientId({ "ID": clientId });
+                                        }
+                                    }
+
+                                    // Retrieve the count for the "AllContacts" Data Extension
+                                    allContactsCount = getDECount("AllContacts");
+
+                                    Write("<script>");
+                                    Write("window.parent.document.getElementById('AllContactsNumber').textContent = " + allContactsCount + ";");
+                                    Write("</script>");
+                            } catch (e) {
+                            Write(Stringify(e));
+                            }
+
                             </script>
                         </div>
                     </div>
