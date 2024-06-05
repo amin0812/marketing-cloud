@@ -1,13 +1,12 @@
 <script runat="server">
   // Initialize the WSProxy object
-  api.setClientId({ "ID": 510000124 ,  "UserID": 1234 });
-
-  var prox = new Script.Util.WSProxy();
 
   try{
+    api.setClientId({ "ID": 510000124});
+
     var prox = new Script.Util.WSProxy();
     var queryAllAccounts = true;
-    filter ={
+    var filter ={
       Property : "Name",
       SimpleOperator: "equals",
       Value : "AllContacts"
