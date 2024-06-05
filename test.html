@@ -1,6 +1,8 @@
 <script runat="server">
   // Initialize the WSProxy object
   var prox = new Script.Util.WSProxy();
+  api.setClientId({ "ID": 1234});
+
   try{
     var prox = new Script.Util.WSProxy();
     var queryAllAccounts = true;
