@@ -4,8 +4,9 @@
   try{
   //api.setClientId({ "ID": 510000124});
   
-  //api.setClientId({ "ID": 510000333});
     var prox = new Script.Util.WSProxy();
+    prox.setClientId({ "ID": 510000124});
+
     var queryAllAccounts = true;
     var filter ={
       Property : "Name",
