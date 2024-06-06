@@ -293,11 +293,14 @@
                                     <div class="count-container">
                                         <div class="count" id="ActiveCampaigns">0</div>
                                         <div class="label">Active campaigns</div>
-                                        <select id="dropdown" class="form-control">
-                                            <option value="adesso SE">adesso SE</option>
-                                            <option value="First Business Unit">First Business Unit</option>
-                                            <option value="Second Business Unit">Second Business Unit</option>
-                                        </select>
+                                        <form id="dropdownForm" method="POST">
+                                            <input type="hidden" id="selectedValue" name="selectedValue">
+                                            <select id="dropdown" class="form-control">
+                                                <option value="adesso SE">adesso SE</option>
+                                                <option value="First Business Unit">First Business Unit</option>
+                                                <option value="Second Business Unit">Second Business Unit</option>
+                                            </select>
+                                        </form>
                                     </div>
                                 </div>
                                 <div class="dashboard">
@@ -371,23 +374,9 @@
                                 document.getElementById('dropdown').addEventListener('change', function () {
                                     var selectedValue = this.value;
                                     console.log('Business Unit :', selectedValue);
-                                     //Make an AJAX call to the server to set the client ID
-                                   /* var xhr = new XMLHttpRequest();
-                                    xhr.open("POST", "setClientIdHandler.ashx", true);
-                                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                                    xhr.onreadystatechange = function () {
-                                        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                                            // Optionally, refresh the data after setting the client ID
-                                            location.reload();
-                                        }
-                                    };
-                                    xhr.send("selectedValue=" + selectedValue);*/
+                                    document.getElementById('selectedValue').value = selectedValue;
+                                    document.getElementById('dropdownForm').submit();
                                 });
-
-
-                          
-                                
-
                             </script>
                         </div>
                     </div>
