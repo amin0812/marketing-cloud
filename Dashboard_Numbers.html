@@ -277,7 +277,7 @@
                                 // Initialize WSProxy and set the Client ID
                                 var prox = new Script.Util.WSProxy();
                                 prox.setClientId({ "ID": clientId });
-
+                                Write(clientId);
                                 // Define the filter to retrieve the Data Extension "AllContacts"
                                 var filter = {
                                     Property: "Name",
