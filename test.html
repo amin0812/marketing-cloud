@@ -16,7 +16,7 @@
     var cols = ["Name","CustomerKey","CategoryID","IsSendable"];
 
     var desc = prox.retrieve("DataExtension", cols, filter);
-    Write(Stringify(desc.Results.CustomerKey));
+    Write(Stringify(desc.Results[0].CustomerKey));
   
       // Log the results to the console for debugging
       Write("<pre>");
