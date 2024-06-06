@@ -274,9 +274,6 @@
                                     default:
                                         throw new Error("Invalid selected value: " + selectedValue);
                                 }
-
-                                console.log("Client ID:", selectedValue);
-
                                 // Initialize WSProxy and set the Client ID
                                 var prox = new Script.Util.WSProxy();
                                 prox.setClientId({ "ID": clientId });
