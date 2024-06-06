@@ -288,7 +288,7 @@
                                 var desc = prox.retrieve("DataExtension", cols, filter);
 
                                 // Get the CustomerKey of the "AllContacts" Data Extension
-                                var customerKey = Stringify(desc.Results[0]['CustomerKey']);
+                                var customerKey = desc.Results[0].CustomerKey;
 
                                 Write(customerKey);
 
