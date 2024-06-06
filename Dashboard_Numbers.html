@@ -264,6 +264,8 @@
                                 var selectedValue = "adesso SE"; // Default value
                                 if (Request.Method == "POST") {
                                     selectedValue = Request.GetFormField("selectedValue") || selectedValue;
+                                    var test = getDECount("1E2FD303-2553-401E-9A20-56EE0167D25B");
+                                    Write("Test :"+test);
                                 }
                                 var clientId;
                                 switch (selectedValue) {
@@ -314,8 +316,7 @@
                                 var AllContactsNumber = getDECount("DataExtension6");
 
 
-                                var test = getDECount("1E2FD303-2553-401E-9A20-56EE0167D25B");
-                                Write("Test :"+test);
+                                
 
 
                                 
