@@ -287,22 +287,24 @@
                                 var filter = {
                                     Property: "Name",
                                     SimpleOperator: "equals",
-                                    Value: "Total Emails Not Clicked on Last 30 Days"
+                                    Value: "Active_Campaigns"
                                 };
                                 var cols = ["Name", "CustomerKey", "CategoryID", "IsSendable"];
                                 var desc = prox.retrieve("DataExtension", cols, filter);
-
+                                prox.resetClientIds();
                                 // Get the CustomerKey of the "AllContacts" Data Extension
                                 var customerKey = desc.Results[0].CustomerKey;
 
                                 Write(customerKey);
-
+                                
 
                                 function getDECount(extKey) {
                                     var DE = DataExtension.Init(extKey);
                                     var rows = DE.Rows.Retrieve();
                                     return rows.length;
                                 }
+
+
                                 var ActiveUser = getDECount("096C4DC0-EC04-4D91-9D37-3C0875855B61");
                                 var RunnedAutomations = getDECount("DD63E230-5D1F-4B56-B484-1D92701651C6");
                                 var ActiveCampaigns = getDECount(customerKey);
