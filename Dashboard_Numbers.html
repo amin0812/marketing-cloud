@@ -259,7 +259,7 @@
                             <!-- Server-Side JavaScript to get Data Extension counts -->
                             <script runat="server">
                                 Platform.Load("Core", "1.1");
-                                var selectedValue = "adesso SE";
+                                var selectedValue = "adesso SE"
                                 var clientId;
                                 switch (selectedValue) {
                                     case "adesso SE":
@@ -274,6 +274,8 @@
                                     default:
                                         throw new Error("Invalid selected value: " + selectedValue);
                                 }
+
+                                console.log("Client ID:", clientId);
 
                                 // Initialize WSProxy and set the Client ID
                                 var prox = new Script.Util.WSProxy();
