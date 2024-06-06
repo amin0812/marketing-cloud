@@ -260,6 +260,38 @@
                             <script runat="server">
                                 Platform.Load("Core", "1.1");
 
+                                var clientId;
+                                switch (selectedValue) {
+                                    case "adesso SE":
+                                        clientId = 510000124;
+                                        break;
+                                    case "First Business Unit":
+                                        clientId = 510000333;
+                                        break;
+                                    case "Second Business Unit":
+                                        clientId = 510006945;
+                                        break;
+                                    default:
+                                        throw new Error("Invalid selected value: " + selectedValue);
+                                }
+
+                                // Initialize WSProxy and set the Client ID
+                                var prox = new Script.Util.WSProxy();
+                                prox.setClientId({ "ID": clientId });
+
+                                // Define the filter to retrieve the Data Extension "AllContacts"
+                                var filter = {
+                                    Property: "Name",
+                                    SimpleOperator: "equals",
+                                    Value: "AllContacts"
+                                };
+                                var cols = ["Name", "CustomerKey", "CategoryID", "IsSendable"];
+                                var desc = prox.retrieve("DataExtension", cols, filter);
+
+                                // Get the CustomerKey of the "AllContacts" Data Extension
+                                var customerKey = Stringify(desc.Results[0]['CustomerKey']);
+
+
                                 function getDECount(extKey) {
                                     var DE = DataExtension.Init(extKey);
                                     var rows = DE.Rows.Retrieve();
@@ -267,7 +299,7 @@
                                 }
                                 var ActiveUser = getDECount("096C4DC0-EC04-4D91-9D37-3C0875855B61");
                                 var RunnedAutomations = getDECount("DD63E230-5D1F-4B56-B484-1D92701651C6");
-                                var ActiveCampaigns = getDECount("6B01E515-104A-41C9-8683-5D4C0BDF17CB");
+                                var ActiveCampaigns = getDECount(customerKey);
                                 var SentEmails = getDECount("9FC4497F-1162-4F14-B0B5-FCF80F73C7CC");
                                 var LicenceExpiration = "30/06/2025";
                                 var AllContactsNumber = getDECount("DataExtension6");
@@ -276,7 +308,7 @@
                                 var selectedValue = "adesso SE"; // Default value
                                 if (Request.Method == "POST") {
                                     selectedValue = Request.GetFormField("selectedValue") || selectedValue;
-                                    
+
 
                                 }
 
