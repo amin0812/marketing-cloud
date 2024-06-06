@@ -376,7 +376,7 @@
                                 document.getElementById('dropdown').addEventListener('change', function () {
                                     var selectedValue = this.value;
                                     console.log('Business Unit :', selectedValue);
-                                    /* Make an AJAX call to the server to set the client ID
+                                     //Make an AJAX call to the server to set the client ID
                                     var xhr = new XMLHttpRequest();
                                     xhr.open("POST", "setClientIdHandler.ashx", true);
                                     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -385,8 +385,8 @@
                                             // Optionally, refresh the data after setting the client ID
                                             location.reload();
                                         }
-                                    };*/
-                                    //xhr.send("selectedValue=" + selectedValue);
+                                    };
+                                    xhr.send("selectedValue=" + selectedValue);
                                 });
 
 
