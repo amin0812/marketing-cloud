@@ -283,7 +283,7 @@
                                 var prox = new Script.Util.WSProxy();
                                 prox.setClientId({ "ID": clientId });
                             
-                                Write(clientId);
+                                Write(clientId + "\r\n");
                                 // Define the filter to retrieve the Data Extension "AllContacts"
                                 var filter = {
                                     Property: "Name",
@@ -296,7 +296,7 @@
                                 // Get the CustomerKey of the "AllContacts" Data Extension
                                 var customerKey = desc.Results[0].CustomerKey;
 
-                                Write(customerKey);
+                                Write("customerKey :"+ customerKey);
                                 
 
                                 function getDECount(extKey) {
