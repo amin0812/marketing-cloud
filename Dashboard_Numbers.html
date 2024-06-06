@@ -287,7 +287,7 @@
                                 var filter = {
                                     Property: "Name",
                                     SimpleOperator: "equals",
-                                    Value: "Active_Campaigns"
+                                    Value: "AllContacts"
                                 };
                                 var cols = ["Name", "CustomerKey", "CategoryID", "IsSendable"];
                                 var desc = prox.retrieve("DataExtension", cols, filter);
@@ -309,10 +309,6 @@
                                 var SentEmails = getDECount("9FC4497F-1162-4F14-B0B5-FCF80F73C7CC");
                                 var LicenceExpiration = "30/06/2025";
                                 var AllContactsNumber = getDECount("DataExtension6");
-
-                                Write("Active : " + ActiveCampaigns);
-                                var Test = getDECount("1E2FD303-2553-401E-9A20-56EE0167D25B");
-                                Write("Test"+ Test);
 
                                 
 
