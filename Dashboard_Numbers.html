@@ -276,6 +276,9 @@
                                 var selectedValue = "adesso SE"; // Default value
                                 if (Request.Method == "POST") {
                                     selectedValue = Request.GetFormField("selectedValue") || selectedValue;
+                                    
+                                    console.log(selectedValue);
+
                                 }
 
                                 Variable.SetValue("@ActiveUser", ActiveUser);
@@ -388,7 +391,6 @@
                                     document.getElementById('dropdownForm').submit();
 
                                 });
-                                console.log(selectedValue);
 
                             </script>
                         </div>
