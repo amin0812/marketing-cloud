@@ -309,9 +309,10 @@
                                 var selectedValue = "adesso SE"; // Default value
                                 if (Request.Method == "POST") {
                                     selectedValue = Request.GetFormField("selectedValue") || selectedValue;
-
-
                                 }
+
+                                Variable.SetValue("@SelectedValue", selectedValue); // Pass the selected value
+
 
                                 Variable.SetValue("@ActiveUser", ActiveUser);
                                 Variable.SetValue("@RunnedAutomations", RunnedAutomations);
