@@ -371,6 +371,35 @@
                                     animateDate("LicenceExpiration", "06/30/2025");
                                     animateCount("AllContactsNumber", AllContactsNumber);
                                 });
+                                try {
+                                // Event listener for the dropdown
+                                document.getElementById('dropdown').addEventListener('change', function () {
+                                    var selectedValue = this.value;
+                                    Write('Business Unit Name : ', selectedValue)
+                                    /* Make an AJAX call to the server to set the client ID
+                                    var xhr = new XMLHttpRequest();
+                                    xhr.open("POST", "setClientIdHandler.ashx", true);
+                                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                                    xhr.onreadystatechange = function () {
+                                        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                                            // Optionally, refresh the data after setting the client ID
+                                            location.reload();
+                                        }
+                                    };
+                                    xhr.send("selectedValue=" + selectedValue);*/
+                                });
+
+
+                                    // Retrieve the count for the "AllContacts" Data Extension
+                                    /*allContactsCount = getDECount("AllContacts");
+
+                                    Write("<script>");
+                                    Write("window.parent.document.getElementById('AllContactsNumber').textContent = " + allContactsCount + ";");
+                                    Write("</script>");*/
+
+                            } catch (e) {
+                            Write(Stringify(e));
+                            }
 
                                 
 
