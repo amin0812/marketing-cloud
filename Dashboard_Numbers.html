@@ -279,7 +279,6 @@
                                     selectedValue = Request.GetFormField("selectedValue") || selectedValue;
                                 }
 
-
                                 Variable.SetValue("@ActiveUser", ActiveUser);
                                 Variable.SetValue("@RunnedAutomations", RunnedAutomations);
                                 Variable.SetValue("@ActiveCampaigns", ActiveCampaigns);
@@ -370,8 +369,7 @@
                                     const SentEmails = parseInt("%%=v(@SentEmails)=%%", 10);
                                     const LicenceExpiration = "%%=v(@LicenceExpiration)=%%";
                                     const AllContactsNumber = parseInt("%%=v(@AllContactsNumber)=%%", 10);
-
-
+                                    const selectedValue = "%%=v(@SelectedValue)=%%"; // Get the selected value
 
                                     animateCount("ActiveUser", ActiveUser);
                                     animateCount("RunnedAutomations", RunnedAutomations);
@@ -379,6 +377,7 @@
                                     animateCount("SentEmails", SentEmails);
                                     animateDate("LicenceExpiration", "06/30/2025");
                                     animateCount("AllContactsNumber", AllContactsNumber);
+
                                     // Set the selected value in the dropdown
                                     document.getElementById('dropdown').value = selectedValue;
                                 });
@@ -386,7 +385,6 @@
                                 // Event listener for the dropdown
                                 document.getElementById('dropdown').addEventListener('change', function () {
                                     var selectedValue = this.value;
-                                    console.log('Business Unit :', selectedValue);
                                     document.getElementById('selectedValue').value = selectedValue;
                                     document.getElementById('dropdownForm').submit();
                                 });
