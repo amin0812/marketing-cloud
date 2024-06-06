@@ -263,11 +263,6 @@
                                 function getDECount(extKey) {
                                     var DE = DataExtension.Init(extKey);
                                     var rows = DE.Rows.Retrieve();
-
-                                    /*for (var i = 0; i < rows.length; i++) {
-                                        var dataRow = rows[i];
-                                        count = count + 1;
-                                    }*/
                                     return rows.length;
                                 }
 
@@ -377,7 +372,7 @@
                                     var selectedValue = this.value;
                                     console.log('Business Unit :', selectedValue);
                                      //Make an AJAX call to the server to set the client ID
-                                    var xhr = new XMLHttpRequest();
+                                   /* var xhr = new XMLHttpRequest();
                                     xhr.open("POST", "setClientIdHandler.ashx", true);
                                     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                                     xhr.onreadystatechange = function () {
@@ -386,7 +381,7 @@
                                             location.reload();
                                         }
                                     };
-                                    xhr.send("selectedValue=" + selectedValue);
+                                    xhr.send("selectedValue=" + selectedValue);*/
                                 });
 
 
