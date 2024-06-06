@@ -273,12 +273,21 @@
                                 var LicenceExpiration = "30/06/2025";
                                 var AllContactsNumber = getDECount("DataExtension6");
 
+                                // Handle form submission
+                                var selectedValue = "adesso SE"; // Default value
+                                if (Request.Method == "POST") {
+                                    selectedValue = Request.GetFormField("selectedValue") || selectedValue;
+                                }
+
+
                                 Variable.SetValue("@ActiveUser", ActiveUser);
                                 Variable.SetValue("@RunnedAutomations", RunnedAutomations);
                                 Variable.SetValue("@ActiveCampaigns", ActiveCampaigns);
                                 Variable.SetValue("@SentEmails", SentEmails);
                                 Variable.SetValue("@LicenceExpiration", LicenceExpiration);
                                 Variable.SetValue("@AllContactsNumber", AllContactsNumber);
+                                Variable.SetValue("@SelectedValue", selectedValue); // Pass the selected value
+
                             </script>
                             <div class="card-body">
                                 <div class="dashboard">
@@ -362,14 +371,18 @@
                                     const LicenceExpiration = "%%=v(@LicenceExpiration)=%%";
                                     const AllContactsNumber = parseInt("%%=v(@AllContactsNumber)=%%", 10);
 
+
+
                                     animateCount("ActiveUser", ActiveUser);
                                     animateCount("RunnedAutomations", RunnedAutomations);
                                     animateCount("ActiveCampaigns", ActiveCampaigns);
                                     animateCount("SentEmails", SentEmails);
                                     animateDate("LicenceExpiration", "06/30/2025");
                                     animateCount("AllContactsNumber", AllContactsNumber);
+                                    // Set the selected value in the dropdown
+                                    document.getElementById('dropdown').value = selectedValue;
                                 });
-                               
+
                                 // Event listener for the dropdown
                                 document.getElementById('dropdown').addEventListener('change', function () {
                                     var selectedValue = this.value;
