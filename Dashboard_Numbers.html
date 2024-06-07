@@ -304,7 +304,7 @@
                                     Value: "Active_Campaigns"
                                 };
                                 var cols = ["Name", "CustomerKey", "CategoryID", "IsSendable"];
-                                var desc = prox.retrieve("DataExtension", cols, filter);
+                                var desc = prox.retrieve("DataExtension", cols, filter ,true);
                                 var customerKey = desc.Results[0].CustomerKey;
                                 var ActiveCampaigns = getDECount(customerKey);
 
