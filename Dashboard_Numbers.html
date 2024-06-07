@@ -267,7 +267,7 @@
                                 }
 
                                 var test = getDECount("1E2FD303-2553-401E-9A20-56EE0167D25B");
-                                    Write("TestLowel :"+test);
+                                Write("TestLowel :" + test);
 
 
                                 // Handle form submission
@@ -275,7 +275,7 @@
                                 if (Request.Method == "POST") {
                                     selectedValue = Request.GetFormField("selectedValue") || selectedValue;
                                     var test = getDECount("1E2FD303-2553-401E-9A20-56EE0167D25B");
-                                    Write("Test :"+test);
+                                    Write("Test :" + test);
                                 }
                                 var clientId;
                                 switch (selectedValue) {
@@ -294,8 +294,8 @@
                                 // Initialize WSProxy and set the Client ID
                                 var prox = new Script.Util.WSProxy();
                                 prox.setClientId({ "ID": clientId });
-                                
-                            
+
+
                                 Write(clientId + "<br>");
                                 // Define the filter to retrieve the Data Extension "AllContacts"
                                 var filter = {
@@ -304,16 +304,23 @@
                                     Value: "Active_Campaigns"
                                 };
                                 var cols = ["Name", "CustomerKey", "CategoryID", "IsSendable"];
-                                var desc = prox.retrieve("DataExtension", cols, filter ,true);
+                                var desc = prox.retrieve("DataExtension", cols, filter);
                                 var customerKey = desc.Results[0].CustomerKey;
                                 var ActiveCampaigns = getDECount(customerKey);
+                                
+                                var result = prox.retrieve(
+                                    "DataExtensionObject[" + customerKey + "]",
+                                    ["JourneyID", "JourneyName", "VersionNumber"]
+                                );
+
+                                Write(Stringify(result));
 
                                 // Get the CustomerKey of the "AllContacts" Data Extension
 
-                                Write("customerKey :"+ customerKey);
-                                
+                                Write("customerKey :" + customerKey);
 
-                                
+
+
 
 
                                 var ActiveUser = getDECount("096C4DC0-EC04-4D91-9D37-3C0875855B61");
@@ -323,10 +330,10 @@
                                 var AllContactsNumber = getDECount("DataExtension6");
 
 
-                                
 
 
-                                
+
+
 
                                 Variable.SetValue("@SelectedValue", selectedValue); // Pass the selected value
 
