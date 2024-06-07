@@ -267,7 +267,7 @@
                                     var test = getDECount("1E2FD303-2553-401E-9A20-56EE0167D25B");
                                     Write("Test :"+test);
                                 }
-                                /*var clientId;
+                                var clientId;
                                 switch (selectedValue) {
                                     case "adesso SE":
                                         clientId = 510000124;
@@ -280,8 +280,7 @@
                                         break;
                                     default:
                                         throw new Error("Invalid selected value: " + selectedValue);
-                                }*/
-                                var clientId = 510000333;
+                                }
                                 // Initialize WSProxy and set the Client ID
                                 var prox = new Script.Util.WSProxy();
                                 prox.setClientId({ "ID": clientId });
