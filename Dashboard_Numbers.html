@@ -260,8 +260,14 @@
                             <script runat="server">
                                 Platform.Load("Core", "1.1");
 
+                                function getDECount(extKey) {
+                                    var DE = DataExtension.Init(extKey);
+                                    var rows = DE.Rows.Retrieve();
+                                    return rows.length;
+                                }
+
                                 // Handle form submission
-                                //var selectedValue = "adesso SE"; // Default value
+                                var selectedValue = "adesso SE"; // Default value
                                 if (Request.Method == "POST") {
                                     selectedValue = Request.GetFormField("selectedValue") || selectedValue;
                                     var test = getDECount("1E2FD303-2553-401E-9A20-56EE0167D25B");
@@ -302,11 +308,7 @@
                                 Write("customerKey :"+ customerKey);
                                 
 
-                                function getDECount(extKey) {
-                                    var DE = DataExtension.Init(extKey);
-                                    var rows = DE.Rows.Retrieve();
-                                    return rows.length;
-                                }
+                                
 
 
                                 var ActiveUser = getDECount("096C4DC0-EC04-4D91-9D37-3C0875855B61");
