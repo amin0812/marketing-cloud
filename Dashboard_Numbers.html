@@ -258,6 +258,7 @@
                             </div>
                             <!-- Server-Side JavaScript to get Data Extension counts -->
                             <script runat="server">
+                                Platform.Load("Core", "1.1");
 
                                 function getDECount(extKey) {
                                     var DE = DataExtension.Init(extKey);
@@ -293,6 +294,7 @@
                                 // Initialize WSProxy and set the Client ID
                                 var prox = new Script.Util.WSProxy();
                                 prox.setClientId({ "ID": clientId });
+                                prox.setOptions({ "queryAllAccounts": true });  // Enable querying across business units
                             
                                 Write(clientId + "<br>");
                                 // Define the filter to retrieve the Data Extension "AllContacts"
