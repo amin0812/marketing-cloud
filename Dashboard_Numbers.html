@@ -303,41 +303,28 @@
                                     SimpleOperator: "equals",
                                     Value: "Active_Campaigns"
                                 };
-
-                                var filter1 = {
-                                    Property: "Name",
-                                    SimpleOperator: "equals",
-                                    Value: "Running_Automations"
-                                };
-
                                 var cols = ["Name", "CustomerKey", "CategoryID", "IsSendable"];
                                 var desc = prox.retrieve("DataExtension", cols, filter);
-                                var desc1 = prox.retrieve("DataExtension", cols, filter1);
-                                
                                 var customerKey = desc.Results[0].CustomerKey;
-                                var customerKey1 = desc1.Results[0].CustomerKey;
-
                                 var ActiveCampaigns = getDECount(customerKey);
-                                var RunnedAutomations = getDECount(customerKey1);
                                 
                                 var result = prox.retrieve(
                                     "DataExtensionObject[" + customerKey + "]",
                                     ["JourneyID"]
                                 );
-                                var result1 = prox.retrieve(
-                                    "DataExtensionObject[" + customerKey1 + "]",
-                                    ["JourneyID"]
-                                );
 
-                                var ActiveCampaigns = result.Results.length;
+                                Write((result.Results.length)+ "<br>");
+                                
                                 // Get the CustomerKey of the "AllContacts" Data Extension
-                                var RunnedAutomations = result1.Results.length;
 
                                 Write("customerKey :" + customerKey);
 
 
+
+
+
                                 var ActiveUser = getDECount("096C4DC0-EC04-4D91-9D37-3C0875855B61");
-                                //var RunnedAutomations = getDECount("DD63E230-5D1F-4B56-B484-1D92701651C6");
+                                var RunnedAutomations = getDECount("DD63E230-5D1F-4B56-B484-1D92701651C6");
                                 var SentEmails = getDECount("0CB7EB7C-4D56-4633-AC49-0FA19B83E950");
                                 var LicenceExpiration = "30/06/2025";
                                 var AllContactsNumber = getDECount("DataExtension6");
