@@ -178,11 +178,25 @@
 
         .dashboard {
             display: flex;
-            justify-content: space-between;
             flex-wrap: wrap;
             gap: 20px;
             margin-top: 50px;
             font-family: Arial, sans-serif;
+        }
+
+        .left-column,
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .left-column {
+            flex: 0 1 220px; /* Fixed width for the left column */
+        }
+
+        .right-column {
+            flex: 1; /* Flexible width for the right column */
         }
 
         .count-container {
@@ -190,10 +204,8 @@
             padding: 20px;
             border: 1px solid #ccc;
             border-radius: 10px;
-            width: 220px;
             box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
             background-color: #fff;
-            flex: 1;
         }
 
         .count {
@@ -239,13 +251,11 @@
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-sm-6 text-left">
-                                        <img src="https://image.s50.sfmc-content.com/lib/fe4211717564047d741674/m/1/adesso_basic_Color_RGB.png"
-                                            alt="" style="width: 300px; padding-left: 10px;">
+                                        <img src="https://image.s50.sfmc-content.com/lib/fe4211717564047d741674/m/1/adesso_basic_Color_RGB.png" alt="" style="width: 300px; padding-left: 10px;">
                                     </div>
                                     <div class="col-sm-6 powered-by">
                                         <div>Powered by</div>
-                                        <img src="https://image.s50.sfmc-content.com/lib/fe4211717564047d741674/m/1/adesso_basic_Color_RGB.png"
-                                            alt="">
+                                        <img src="https://image.s50.sfmc-content.com/lib/fe4211717564047d741674/m/1/adesso_basic_Color_RGB.png" alt="">
                                     </div>
                                 </div>
                                 <br>
@@ -256,206 +266,121 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Server-Side JavaScript to get Data Extension counts -->
-                            <script runat="server">
-                                Platform.Load("Core", "1.1");
-
-                                function getDECount(extKey) {
-                                    var DE = DataExtension.Init(extKey);
-                                    var rows = DE.Rows.Retrieve();
-                                    return rows.length;
-                                }
-
-                                var test = getDECount("1E2FD303-2553-401E-9A20-56EE0167D25B");
-                                Write("TestLowel :" + test);
-
-
-                                // Handle form submission
-                                var selectedValue = "adesso SE"; // Default value
-                                if (Request.Method == "POST") {
-                                    selectedValue = Request.GetFormField("selectedValue") || selectedValue;
-                                    var test = getDECount("1E2FD303-2553-401E-9A20-56EE0167D25B");
-                                    Write("Test :" + test);
-                                }
-                                var clientId;
-                                switch (selectedValue) {
-                                    case "adesso SE":
-                                        clientId = 510000124;
-                                        break;
-                                    case "First Business Unit":
-                                        clientId = 510000333;
-                                        break;
-                                    case "Second Business Unit":
-                                        clientId = 510006945;
-                                        break;
-                                    default:
-                                        throw new Error("Invalid selected value: " + selectedValue);
-                                }
-                                // Initialize WSProxy and set the Client ID
-                                var prox = new Script.Util.WSProxy();
-                                prox.setClientId({ "ID": clientId });
-
-
-                                Write(clientId + "<br>");
-                                // Define the filter to retrieve the Data Extension "AllContacts"
-                                var filter = {
-                                    Property: "Name",
-                                    SimpleOperator: "equals",
-                                    Value: "Active_Campaigns"
-                                };
-                                var cols = ["Name", "CustomerKey", "CategoryID", "IsSendable"];
-                                var desc = prox.retrieve("DataExtension", cols, filter);
-                                var customerKey = desc.Results[0].CustomerKey;
-                                var ActiveCampaigns = getDECount(customerKey);
-                                
-                                var result = prox.retrieve(
-                                    "DataExtensionObject[" + customerKey + "]",
-                                    ["JourneyID"]
-                                );
-
-                                Write((result.Results.length)+ "<br>");
-                                
-                                // Get the CustomerKey of the "AllContacts" Data Extension
-
-                                Write("customerKey :" + customerKey);
-
-
-
-
-
-                                var ActiveUser = getDECount("096C4DC0-EC04-4D91-9D37-3C0875855B61");
-                                var RunnedAutomations = getDECount("DD63E230-5D1F-4B56-B484-1D92701651C6");
-                                var SentEmails = getDECount("0CB7EB7C-4D56-4633-AC49-0FA19B83E950");
-                                var LicenceExpiration = "30/06/2025";
-                                var AllContactsNumber = getDECount("DataExtension6");
-
-
-
-
-
-
-
-                                Variable.SetValue("@SelectedValue", selectedValue); // Pass the selected value
-
-
-                                Variable.SetValue("@ActiveUser", ActiveUser);
-                                Variable.SetValue("@RunnedAutomations", RunnedAutomations);
-                                Variable.SetValue("@ActiveCampaigns", ActiveCampaigns);
-                                Variable.SetValue("@SentEmails", SentEmails);
-                                Variable.SetValue("@LicenceExpiration", LicenceExpiration);
-                                Variable.SetValue("@AllContactsNumber", AllContactsNumber);
-                                Variable.SetValue("@SelectedValue", selectedValue); // Pass the selected value
-
-                            </script>
                             <div class="card-body">
                                 <div class="dashboard">
-                                    <div class="count-container">
-                                        <div class="count" id="ActiveUser">0</div>
-                                        <div class="label">Active users</div>
+                                    <div class="left-column">
+                                        <div class="count-container" id="total-sent">
+                                            <div class="count" id="totalSentCount">0</div>
+                                            <div class="label">Total Sent</div>
+                                        </div>
+                                        <div class="count-container" id="total-delivered">
+                                            <div class="count" id="totalDeliveredCount">0</div>
+                                            <div class="label">Total Delivered</div>
+                                        </div>
+                                        <div class="count-container" id="total-clicks">
+                                            <div class="count" id="totalClicksCount">0</div>
+                                            <div class="label">Total Clicks</div>
+                                        </div>
                                     </div>
-                                    <div class="count-container">
-                                        <div class="count" id="RunnedAutomations">0</div>
-                                        <div class="label">Runned automations</div>
-                                    </div>
-                                    <div class="count-container">
-                                        <div class="count" id="ActiveCampaigns">0</div>
-                                        <div class="label">Active campaigns</div>
-                                        <form id="dropdownForm" method="POST">
-                                            <input type="hidden" id="selectedValue" name="selectedValue">
-                                            <select id="dropdown" class="form-control">
-                                                <option value="adesso SE">adesso SE</option>
-                                                <option value="First Business Unit">First Business Unit</option>
-                                                <option value="Second Business Unit">Second Business Unit</option>
-                                            </select>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="dashboard">
-                                    <div class="count-container">
-                                        <div class="count" id="SentEmails">0</div>
-                                        <div class="label">Sent Emails</div>
-                                    </div>
-                                    <div class="count-container">
-                                        <div class="count" id="LicenceExpiration">30/06/2025</div>
-                                        <div class="label">Licence Expiration</div>
-                                    </div>
-                                    <div class="count-container">
-                                        <div class="count" id="AllContactsNumber">0</div>
-                                        <div class="label">All contacts number</div>
+                                    <div class="right-column">
+                                        <div class="count-container" id="total-opens">
+                                            <div class="count" id="totalOpensCount">0</div>
+                                            <div class="label">Total Opens</div>
+                                        </div>
+                                        <div class="count-container" id="total-bounces">
+                                            <div class="count" id="totalBouncesCount">0</div>
+                                            <div class="label">Total Bounces</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <script>
-                                function animateCount(elementId, finalCount) {
-                                    const duration = 2000; // Duration of the animation in milliseconds
-                                    const frameRate = 60; // Frames per second
-                                    const totalFrames = Math.round(duration / (1000 / frameRate));
-                                    let currentFrame = 0;
-                                    const countElement = document.getElementById(elementId);
-
-                                    const counter = setInterval(() => {
-                                        currentFrame++;
-                                        const progress = currentFrame / totalFrames;
-                                        const currentCount = Math.round(finalCount * progress);
-                                        countElement.textContent = currentCount;
-
-                                        if (currentFrame === totalFrames) {
-                                            clearInterval(counter);
-                                        }
-                                    }, 1000 / frameRate);
-                                }
-
-                                function animateDate(elementId, finalDate) {
-                                    const countElement = document.getElementById(elementId);
-                                    const targetDate = new Date(finalDate).getTime();
-
-                                    const timer = setInterval(() => {
-                                        const now = new Date().getTime();
-                                        const distance = targetDate - now;
-
-                                        if (distance <= 0) {
-                                            clearInterval(timer);
-                                            countElement.textContent = finalDate;
-                                        }
-                                    }, 1000);
-                                }
-
-                                document.addEventListener("DOMContentLoaded", () => {
-                                    const ActiveUser = parseInt("%%=v(@ActiveUser)=%%", 10);
-                                    const RunnedAutomations = parseInt("%%=v(@RunnedAutomations)=%%", 10);
-                                    const ActiveCampaigns = parseInt("%%=v(@ActiveCampaigns)=%%", 10);
-                                    const SentEmails = parseInt("%%=v(@SentEmails)=%%", 10);
-                                    const LicenceExpiration = "%%=v(@LicenceExpiration)=%%";
-                                    const AllContactsNumber = parseInt("%%=v(@AllContactsNumber)=%%", 10);
-                                    const selectedValue = "%%=v(@SelectedValue)=%%"; // Get the selected value
-
-                                    animateCount("ActiveUser", ActiveUser);
-                                    animateCount("RunnedAutomations", RunnedAutomations);
-                                    animateCount("ActiveCampaigns", ActiveCampaigns);
-                                    animateCount("SentEmails", SentEmails);
-                                    animateDate("LicenceExpiration", "06/30/2025");
-                                    animateCount("AllContactsNumber", AllContactsNumber);
-
-                                    // Set the selected value in the dropdown
-                                    document.getElementById('dropdown').value = selectedValue;
-                                });
-
-                                // Event listener for the dropdown
-                                document.getElementById('dropdown').addEventListener('change', function () {
-                                    var selectedValue = this.value;
-                                    document.getElementById('selectedValue').value = selectedValue;
-                                    document.getElementById('dropdownForm').submit();
-
-                                });
-
-                            </script>
+                            <div class="separation-line"></div>
+                            <div class="row">
+                                <div class="col-sm-6 text-left">
+                                    <h5 class="card-category">DELIVERIES</h5>
+                                    <h2 class="card-title">DELIVERED</h2>
+                                </div>
+                                <div class="chart-area">
+                                    <canvas id="lineChartExample"></canvas>
+                                </div>
+                            </div>
+                            <div class="separation-line"></div>
+                            <div class="row">
+                                <div class="col-sm-6 text-left">
+                                    <h5 class="card-category">INTERACTIONS</h5>
+                                    <h2 class="card-title">CLICKS &amp; OPENS</h2>
+                                </div>
+                                <div class="chart-area">
+                                    <canvas id="barChartSimpleGradientsNumbers"></canvas>
+                                </div>
+                            </div>
+                            <div class="separation-line"></div>
+                            <div class="row">
+                                <div class="col-sm-6 text-left">
+                                    <h5 class="card-category">ERRORS</h5>
+                                    <h2 class="card-title">BOUNCES</h2>
+                                </div>
+                                <div class="chart-area">
+                                    <canvas id="CountryChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="separation-line"></div>
+                            <div class="row">
+                                <div class="col-sm-6 text-left">
+                                    <h5 class="card-category">RECIPIENT DOMAINS</h5>
+                                    <h2 class="card-title">TOP RECIPIENT DOMAINS</h2>
+                                </div>
+                                <div class="chart-area">
+                                    <canvas id="PieChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="separation-line"></div>
+                            <div class="row">
+                                <div class="col-sm-6 text-left">
+                                    <h5 class="card-category">LINK CLICK MAP</h5>
+                                    <h2 class="card-title">TOP 10 CLICKS</h2>
+                                </div>
+                                <div class="chart-area">
+                                    <canvas id="doughnutChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="separation-line"></div>
+                            <div class="row">
+                                <div class="col-sm-6 text-left">
+                                    <h5 class="card-category">LAST 5 SENDS</h5>
+                                    <h2 class="card-title">PERFORMANCES</h2>
+                                </div>
+                                <div class="chart-area">
+                                    <canvas id="barChartMultipleBars"></canvas>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Include your JavaScript libraries here -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Mock data for the counts
+            var totalSent = 1000;
+            var totalDelivered = 900;
+            var totalClicks = 300;
+            var totalOpens = 400;
+            var totalBounces = 100;
+
+            // Update the counts
+            $('#totalSentCount').text(totalSent);
+            $('#totalDeliveredCount').text(totalDelivered);
+            $('#totalClicksCount').text(totalClicks);
+            $('#totalOpensCount').text(totalOpens);
+            $('#totalBouncesCount').text(totalBounces);
+        });
+    </script>
 </body>
 
 </html>
