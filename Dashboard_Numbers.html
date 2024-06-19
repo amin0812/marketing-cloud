@@ -176,14 +176,16 @@
             padding-bottom: 10px;
         }
 
+        
+
         .dashboard {
             display: flex;
-            justify-content: space-between;
             flex-wrap: wrap;
             gap: 20px;
             margin-top: 50px;
             font-family: Arial, sans-serif;
         }
+
 
         .count-container {
             text-align: center;
@@ -307,14 +309,14 @@
                                 var desc = prox.retrieve("DataExtension", cols, filter);
                                 var customerKey = desc.Results[0].CustomerKey;
                                 var ActiveCampaigns = getDECount(customerKey);
-                                
+
                                 var result = prox.retrieve(
                                     "DataExtensionObject[" + customerKey + "]",
                                     ["JourneyID"]
                                 );
 
-                                Write((result.Results.length)+ "<br>");
-                                
+                                Write((result.Results.length) + "<br>");
+
                                 // Get the CustomerKey of the "AllContacts" Data Extension
 
                                 Write("customerKey :" + customerKey);
